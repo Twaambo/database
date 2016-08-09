@@ -1,0 +1,11 @@
+use vware0;
+
+drop table if exists player;
+
+create table player( id int primary key auto_increment
+                   , lastName varchar(255)
+                   , firstName varchar(255)
+                   , number char(3)
+                   , posId int
+                   );
+                   

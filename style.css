@@ -1,0 +1,49 @@
+body
+{
+  background-color:#ff5930;
+  color:#101010;
+}
+
+a
+{
+  text-decoration:none;
+}
+
+h1
+{
+  font-size:130%;
+}
+
+h1,h2,h3,h4,h5,h6
+{
+  font-family:sans-serif; 
+}
+
+p
+{
+  font-size:80%;
+}
+
+body > p
+{
+  font-size:100%;
+  background-color:#ffffff;
+  padding:1em;
+  margin:1em;
+  border:1px solid #9999ff;
+}
+
+#course_edit_form
+{
+  display:none;
+}
+
+#console
+{
+  display:none;
+}
+
+#courses
+{
+  overflow:scroll;
+}

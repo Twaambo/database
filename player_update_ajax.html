@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Player Update w/ AJAX </title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Player Update w/ AJAX </h1>
+
+<p id="player_select_form">
+</p>
+<p id="player_edit_form">
+</p>
+<p id="console">
+</p>
+
+<script>
+// JavaScript goes here
+window.onload = function()
+{
+  var player_select_req = new XMLHttpRequest();
+
+  player_select_req.onreadystatechange = function()
+  {
+    if( player_select_req.readyState == 4
+     && player_select_req.status == 200   )
+    {
+      document.getElementById("player_select_form")
+              .innerHTML = player_select_req.responseText;
+    }
+  }
+
+  player_select_req.open("GET","player_update_select_ajax.php",true);
+  player_select_req.send();
+}
+
+var showPlayerEditForm = function(id)
+{
+  if(id)
+  {
+    document.getElementById("player_edit_form").style.display = "block";
+  }
+  else
+  {
+    document.getElementById("player_edit_form").style.display = "none";
+  }
+
+  var player_form_req = new XMLHttpRequest();
+  player_form_req.onreadystatechange = function()
+  {
+    if( player_form_req.readyState == 4
+     && player_form_req.status == 200)
+    {
+      document.getElementById("player_edit_form")
+              .innerHTML = player_form_req.responseText;
+    }
+  }
+  player_form_req.open("GET","player_update_form_ajax.php?id="+id,true);
+  player_form_req.send();
+
+}
+
+var submitEdits = function()
+{
+  document.getElementById("console").style.display = "block";
+
+  var args = "";
+  args += "id=" + document.player_edit_form.id.value;
+  args += "&";
+  args += "lastName=" + document.player_edit_form.lastName.value;
+  args += "&";
+  args += "firstName=" + document.player_edit_form.firstName.value;
+  args += "&";
+  args += "number=" + document.player_edit_form.number.value;
+  args += "&";
+  args += "posId=" + document.player_edit_form.posId.value;
+  console.log(args);
+
+  var player_update_req = new XMLHttpRequest();
+  player_update_req.onreadystatechange = function()
+  {
+    if( player_update_req.readyState == 4
+     && player_update_req.status == 200)
+    {
+      document.getElementById("console")
+              .innerHTML = player_update_req.responseText;
+    }
+  }
+  player_update_req.open("POST","player_update_ajax.php",true);
+  player_update_req.setRequestHeader(
+    "Content-Type"
+  , "application/x-www-form-urlencoded");
+  player_update_req.send(args);
+
+}
+
+</script>
+</body>
+</html>

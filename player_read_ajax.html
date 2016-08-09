@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Player Table </title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Player Table </h1>
+
+<p id="player"> </p>
+
+<script>
+window.onload = function()
+{
+  var player_req = new XMLHttpRequest();
+
+  player_req.onreadystatechange = function()
+  {
+    if( player_req.readyState ==4
+       &&
+        player_req.status == 200)
+    {
+      document.getElementById("player")
+              .innerHTML = player_req.responseText;
+    }
+  }
+
+  player_req.open("GET","player_read_ajax.php",true);
+  player_req.send();
+}
+</script>
+</body>
+</html>
